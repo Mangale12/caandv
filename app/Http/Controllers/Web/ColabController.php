@@ -54,11 +54,11 @@ class ColabController extends Controller
         $json = array(
             'details' => json_encode($data)
         );
-        $sql = FormNumber::create($json);  
+        $sql = FormNumber::create($json);
         if(!$sql){
             return redirect()->back()->withInput()->with('error', $sql);
         }
-      
+
         // $sendtexttouser ='Welcome'.' ' . $request->name . ' ' .', to Noor Games family.We have received your details. Someone from collab team will reach back to you based on your eligibility.
         //    Note: Do not  bother asking to Sasha when will they reach out.';
         // $str = $request->phone_number;
@@ -76,8 +76,8 @@ class ColabController extends Controller
         // 'from' => '18337222376',
         // 'text' => $sendtexttouser
         // ]);
-       
-        
+
+
         //   $sendtexttoadmin =' Collab team      '.' '  . $request->name . ' is added to the family with ' . 'Phone ' . $request->phone_number . ' ' . 'Take your time to reach out to him.';
         // $basic  = new \Vonage\Client\Credentials\Basic($key, $secret);
         // $client = new \Vonage\Client($basic);
@@ -86,8 +86,8 @@ class ColabController extends Controller
         // 'from' => '18337222376',
         // 'text' => $sendtexttoadmin
         // ]);
-        
-        
+
+
         return redirect()->route('formsuccess')->with('success', 'Thank You.');
     }
 }

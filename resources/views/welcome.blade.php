@@ -23,36 +23,34 @@
         </div>
         @php
             $questions = App\Models\Question::get();
+            // dd($questions);
+            // echo '<pre>';
+            //     print_r($questions);
+            //     die;
             $step_count = 1;
         @endphp
       <div class="flex-item">
-        <form
-        id="regForm"
-        method="post"
-        class="gradient-box rainbow"
-          action="{{ route('forms.saveForm') }}"
-          enctype="multipart/form-data"
-        >
+        <form id="regForm" method="post" class="gradient-box rainbow" action="{{ route('forms.saveForm') }}" enctype="multipart/form-data">
         @csrf
         @if (session('error'))
             @if(is_array(session('error')))
                 @foreach(session('error') as $error)
                     <div class = "alert alert-danger alert-dismissible fade show" role = "alert" style=" background: red; color: white; ">
                         {{ $error }}
-                        {{-- <button type = "button" class = "close" data-dismiss = "alert" aria-label = "Close">
+                        <button type = "button" class = "close" data-dismiss = "alert" aria-label = "Close">
                             <i class = "ik ik-x"></i>
-                        </button> --}}
+                        </button>
                     </div>
                 @endforeach
             @else
                 <div class = "alert alert-danger alert-dismissible fade show" role = "alert" style=" background: red; color: white; ">
                     {{ session('error') }}
-                    {{-- <button type = "button" class = "close" data-dismiss = "alert" aria-label = "Close">
+                    <button type = "button" class = "close" data-dismiss = "alert" aria-label = "Close">
                         <i class = "ik ik-x"></i>
-                    </button> --}}
+                    </button>
                 </div>
             @endif
-    
+
         @endif
           <!-- One "tab" for each step in the form: -->
         @foreach ($questions as $index => $item)
@@ -74,9 +72,9 @@
                     required
                     />
                     <label class="border-gradient border-gradient-purple upload-img" for="imgInp">Choose Image</label>
-                    
+
                     <img id="blah" src="{{ URL::to('/images/noimage.jpeg') }}" alt="your image" />
-                
+
                 </p>
             @endif
 
@@ -100,8 +98,18 @@
                     required
                 />
             </p>
+            @elseif($item->type == 'email')
+            <p>
+                <input
+                class="border-gradient border-gradient-purple"
+                    placeholder="{{$item->question}}"
+                    oninput="this.className = ''"
+                    name="{{$item->name}}"
+                    required
+                />
+            </p>
             @endif
-        </div>        
+        </div>
         @endforeach
           <span id="invalid-pop">please enter correct value !!!</span>
           <div style="overflow: auto">
@@ -113,9 +121,7 @@
               <button class="border-gradient border-gradient-purple btn" type="button" id="nextBtn" onclick="nextPrev(1)">
                 Next
               </button>
-              {{-- <button class="border-gradient border-gradient-purple btn" type="button" id="nextBtn" onclick="nextPrev(1)">
-                Submit
-              </button> --}}
+
             </div>
           </div>
           <!-- Circles which indicates the steps of the form: -->

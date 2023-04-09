@@ -1,14 +1,7 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="icon" href="{{ URL::to('/images/g9.webp') }}">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
-    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+<head>
     <!-- Required meta tags-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
@@ -34,10 +27,7 @@
     <link href="{{ asset('css/my.css') }}" rel="stylesheet" media="all">
     <link href="https://unpkg.com/smartwizard@5/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('css/style_front.css') }}" />
-    <title>Thank you form</title>
     <style>
-
         @media screen and (max-width: 576px) {
          #myVideo {
          position: fixed;
@@ -256,18 +246,16 @@
             width:100%!important;
         }
       </style>
-  </head>
-  <body>
-    <div id="main-container">
+</head>
 
-        <div class="flex-item logo">
-            <video width="150rem" height="240" >
-            <source src="{{ URL::to('/images/animation.gif.mp4') }}" type="video/mp4">
-          </video>
-        </div>
-      <div class="flex-item">
-        <div class="gradient-box rainbow" style="height: 54rem; top: -231px;">
-     <div class="page-wrapper font-robo">
+<body>
+
+    <div class="page-wrapper font-robo">
+        <video autoplay muted loop id="myVideo">
+            <source src="{{asset('images/fin.mp4')}}" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+  <div class="page-wrapper font-robo">
     <div class="wrapper wrapper--w680">
         <div class="card card-1 py-5">
             <!--<div class="card-heading">  -->
@@ -303,14 +291,9 @@
           </div>
     </div>
 </div>
-        </div>
 
     </div>
-    {{-- <div>
-      <p style=" background:linear-gradient(to left, #FF0000 0%, #ffff00 50%, #FF0000 100%); -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent; margin-top: 10rem;">Copyright Noorgames © 2021 All Rights Reserved</p>
-    </div> --}}
-    </div>
+    <!-- Jquery JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     {{-- <script src="js/global.js"></script> --}}
     <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
@@ -415,7 +398,8 @@
         });
         $('#state').select2();
     </script>
-  </body>
-  <script src="{{ asset('js/main.js') }}"></script>
+</body>
+
 </html>
 
+</html>

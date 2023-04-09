@@ -20,7 +20,7 @@ class ColabController extends Controller
             return Response::json(['error' => $sql],404);
             // return redirect()->back()->withInput()->with('error', $sql);
         }
-        
+
         // $sendtext = $request->phone_number . ' ' . 'has joined for vaccency .
         // Yayyy ';
         // $basic  = new \Vonage\Client\Credentials\Basic("e20bd554", "M5arJoXIrJ8Kat1r");
@@ -61,7 +61,7 @@ class ColabController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
@@ -76,7 +76,7 @@ class ColabController extends Controller
             $colab = FormNumber::where('id',$id);
             if($colab->count() > 0){
                 $colab = $colab->first();
-                return view('admin.colab.list ',['colab'=>$colab]); 
+                return view('admin.colab.list ',['colab'=>$colab]);
             }
         } catch (\Throwable $th) {
             // dd($th->getMessage());

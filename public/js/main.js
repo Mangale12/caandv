@@ -25,14 +25,20 @@ function nextPrev(n) {
   // This function will figure out which tab to display
   var x = document.getElementsByClassName("tab");
   // Exit the function if any field in the current tab is invalid:
-  if (n == 1 && !validateForm()) return false;
+//   if (n == 1 && !validateForm()){
+//     alert('wrong');
+//     return false;
+//   }
   // Hide the current tab:
   x[currentTab].style.display = "none";
   // Increase or decrease the current tab by 1:
-  currentTab = currentTab + n;
+//   alert(n);
+  currentTab = currentTab+n;
   // if you have reached the end of the form...
+//   alert(currentTab);
   if (currentTab >= x.length) {
     // ... the form gets submitted:
+    alert('lll');
     document.getElementById("regForm").submit();
     return false;
   }
@@ -52,7 +58,7 @@ function validateForm() {
       // add an "invalid" class to the field:
       y[i].className += "invalid";
       document.getElementById("invalid-pop").style.display="block"
-      
+
       // and set the current valid status to false
       valid = false;
     }
