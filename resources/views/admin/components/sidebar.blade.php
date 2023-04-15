@@ -29,7 +29,7 @@
                            </p>
                         </a>
                         <ul class="nav nav-treeview">
-                           <li class="nav-item">   
+                           <li class="nav-item">
                               <a href="{{route('users.index')}}" class="nav-link {{((Request::segment(2) == 'users') && (Request::segment(3) == ''))?'active':''}}">
                                  <i class="far fa-circle nav-icon"></i>
                                  <p>Users List</p>
@@ -60,7 +60,7 @@
                            </p>
                         </a>
                         <ul class="nav nav-treeview">
-                           <li class="nav-item">   
+                           <li class="nav-item">
                               <a href="{{route('questions.index')}}" class="nav-link {{((Request::segment(2) == 'questions') && (Request::segment(3) == ''))?'active':''}}">
                                  <i class="far fa-circle nav-icon"></i>
                                  <p>Questions List</p>
@@ -73,6 +73,14 @@
                               </a>
                            </li>
                         </ul>
+                     </li>
+                     <li class="nav-item">
+                        <a href="{{route('settings.index')}}" class="nav-link {{(Request::segment(2) == 'settings.index') ? 'active':''}}">
+                            <i class="nav-icon fa fa-cog"></i>
+                           <p>
+                              General Settings
+                           </p>
+                        </a>
                      </li>
                   </ul>
                </nav>

@@ -25,6 +25,13 @@
       <link rel="stylesheet" href="{{asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
       <link rel="stylesheet" href="{{asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
       <link rel="stylesheet" href="{{asset('css/style.css')}}">
+      <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css" />
+      <link href="https://unpkg.com/bootstrap-table@1.21.4/dist/bootstrap-table.min.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/bootstrap-table@1.21.4/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.21.4/dist/extensions/print/bootstrap-table-print.min.js"></script>
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+
       <script>
          var base_url = window.location.origin;
       </script>
@@ -52,7 +59,7 @@
          <aside class="control-sidebar control-sidebar-dark">
          </aside>
       </div>
-      
+
       <div class="modal fade" id="modal-show">
          <div class="modal-dialog">
            <div class="modal-content">
@@ -96,7 +103,7 @@
    <!-- <script src="{{asset('plugins/daterangepicker/daterangepicker.js')}}"></script> -->
    <!-- <script src="{{asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script> -->
    <!-- <script src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script> -->
-   
+
    <script src="{{asset('js/pages/dashboard.js')}}"></script>
 
    {{-- flash messages --}}
@@ -106,7 +113,7 @@
       </script>
    @endif
 
-   
+
    @if(session()->has('error'))
       <script>
          toastr.error('{{session()->get('error')}}')
@@ -114,9 +121,13 @@
    @endif
    {{-- flash messages --}}
 
+   {{-- <script>
+    $(document).ready(function () {
 
+  });
+  </script> --}}
    <script>
-      function showItem(url,titleText,itemType,toggleElement = ''){         
+      function showItem(url,titleText,itemType,toggleElement = ''){
          var modal = $('#modal-show');
          var modalTitle = $('.modal-title');
          var modalBody = $('.modal-body');
@@ -130,7 +141,7 @@
             beforeSend: function() {
                modalBody.html('<div class="loader"></div>');
             },
-            success: function(data) {               
+            success: function(data) {
                if(itemType == 'message'){
                   $(toggleElement).html('<span class="btn btn-danger">Read</span>')
                }
@@ -148,7 +159,7 @@
       $(document).ready(function(){
          //show modal
          //delete item sweetalert initialize
-         if($('.delete-item').length > 0){            
+         if($('.delete-item').length > 0){
             $('.delete-item').on('click',function(e){
                e.preventDefault();
                var form_id = $(this).data('form');
@@ -166,12 +177,13 @@
                      form.submit();
                   }
                })
-               
+
             });
          }
 
          //item list datatable initialize
          if($('#dataTable').length > 0){
+            // $('.table').DataTable();
             $('#dataTable').DataTable({
                   "paging": true,
                   "lengthChange": true,
@@ -180,14 +192,15 @@
                   "info": true,
                   "autoWidth": false,
                   "responsive": true,
-                  "dom": 'Bfrtip',
+                  "dom": 'lBfrtip',
                   "buttons": [
                      'copy', 'csv', 'excel', 'pdf', 'print'
                   ]
             });
+
          }
-         
-         //item edit/create summernote initialize   
+
+         //item edit/create summernote initialize
          if($('.summernote').length > 0){
             $('.summernote').summernote({
                height: 150,   //set editable area's height
@@ -197,4 +210,5 @@
       });
    </script>
    @yield('script');
+
 </html>

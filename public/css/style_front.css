@@ -51,7 +51,7 @@ h1 {
   text-align: center;
 }
 
-input {
+input, select {
   background-color: transparent !important;
   padding: 10px;
   width: 100%;
@@ -92,7 +92,7 @@ button {
   background: linear-gradient(to left, #743ad5, #d53a9d);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  
+
 }
 
 button:hover {
@@ -253,7 +253,7 @@ button:hover {
   box-shadow: -2px 9px 51px 8px rgba(81,70,207,0.69);
   -webkit-box-shadow: -2px 9px 51px 8px rgba(81,70,207,0.69);
   -moz-box-shadow: -2px 9px 51px 8px rgba(81,70,207,0.69);
-  
+
 }
 
 .border-gradient:hover{

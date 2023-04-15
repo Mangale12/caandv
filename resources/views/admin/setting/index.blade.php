@@ -32,8 +32,8 @@ Settings
             </ul>
         </div>
     @endif
-    
-    <div class="container-fluid">        
+
+    <div class="container-fluid">
           <form action="{{route('settings.update',[$item->id])}}" method="post" enctype="multipart/form-data">
               <input type="hidden" name="_method" value="PUT">
               @csrf
@@ -99,11 +99,32 @@ Settings
                         </div>
                       </div>
                   </div>
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label for="name">Register Image</label>
+                        <input type="file" class="form-control" name="register_image" id="book-image" onchange="loadFile(event)">
+                        <img id="preview-logo-before-upload"  height="200" width="200" class="rounded me-2 d-none">
+                      </div>
+                    </div>
+                </div>
               </div>
+            </div>
             </div>
         </form>
     </div>
 </section>
+<script>
+    var loadFile = function(event) {
+      var output = document.getElementById('preview-logo-before-upload');
+      output.className = 'd-block';
+      var reader = new FileReader();
+      reader.onload = function(){
+        output.src = reader.result;
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    };
+  </script>
 
 @endsection
 

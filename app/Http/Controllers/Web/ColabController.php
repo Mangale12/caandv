@@ -5,13 +5,15 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\FormNumber;
 use App\Models\Question;
+use App\Models\State;
+use App\Models\City;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class ColabController extends Controller
 {
     public function store(Request $request){
-        // dd($request->all());
+        //dd($request->all());
         // $validator = Validator::make($request->all(), [
         //     'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|unique:formnumbers,phone_number',
         //     'name' => 'required'
@@ -23,6 +25,7 @@ class ColabController extends Controller
         $data = [];
         $questions = Question::get();
         $post_data = $request->all();
+        // dd($post_data);
         // $name  = $request->name;
         // $phone  = $request->phone_number;
         foreach($questions as $question){
@@ -33,12 +36,18 @@ class ColabController extends Controller
                     }
                 }
                 $answer = $post_data[$question->name];
+                // dd($answer);
+                if($question->type == 'number'){
+                    $answer = '+977'.$answer;
+                }
+
                 $image  = '';
                 if($question->type == 'image'){
                     $uploadFile = uploadFile($request->file($question->name),'form-images'); //uploadFile from helper.php
                     $image = $uploadFile;
                     $answer = '';
                 }
+
                 $data[] = [
                     'question' => $question->question,
                     'name' => $question->name,
@@ -51,11 +60,19 @@ class ColabController extends Controller
             //     echo 'asdf';
             // }
         }
+            $address[] = [
+                'country'=>$request->address,
+                'state'=>$request->address1,
+                'city'=>$request->address2,
+            ];
         $json = array(
-            'details' => json_encode($data)
+            'details' => json_encode($data),
+            'address' => json_encode($address),
+            'seen'=>'0',
         );
         $sql = FormNumber::create($json);
         if(!$sql){
+            dd('error');
             return redirect()->back()->withInput()->with('error', $sql);
         }
 
@@ -89,5 +106,22 @@ class ColabController extends Controller
 
 
         return redirect()->route('formsuccess')->with('success', 'Thank You.');
+    }
+    public function get_state_by_country(Request $request){
+        try {
+            $states = State::where('country_id',$request->country_id)->get();
+            return $states;
+        } catch (\Throwable $th) {
+            return "Something Wrong";
+        }
+
+    }
+    public function get_city_by_state(Request $request){
+        try {
+            $cities = City::where('state_id', $request->state_id)->get();
+            return $cities;
+        } catch (\Throwable $th) {
+            return "Something is Wrong";
+        }
     }
 }

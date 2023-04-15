@@ -39,7 +39,7 @@ class ColabController extends Controller
      */
     public function index()
     {
-        $products = FormNumber::orderBy('id','desc')->get();
+        $products = FormNumber::orderBy('details->question','desc')->get();
         return view('admin.colab.index',compact('products'));
     }
 
@@ -76,6 +76,8 @@ class ColabController extends Controller
             $colab = FormNumber::where('id',$id);
             if($colab->count() > 0){
                 $colab = $colab->first();
+                $colab->seen = '1';
+                $colab->update();
                 return view('admin.colab.list ',['colab'=>$colab]);
             }
         } catch (\Throwable $th) {
@@ -115,6 +117,14 @@ class ColabController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        FormNumber::where('id',$id)->delete();
+        return back()->with('message', 'Deleted Successfully');
+    }
+    public function delete($id)
+    {
+        dd('hyayya');
+        FormNumber::where('id',$id)->delete();
+        return back()->with('message', 'Deleted Successfully');
     }
 }

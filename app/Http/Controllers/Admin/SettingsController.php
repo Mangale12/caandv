@@ -12,7 +12,7 @@ class SettingsController extends Controller
 {
     private SettingRepositoryInterface $settingRepository;
 
-    public function __construct(SettingRepositoryInterface $settingRepository) 
+    public function __construct(SettingRepositoryInterface $settingRepository)
     {
         $this->settingRepository = $settingRepository;
     }
@@ -24,6 +24,8 @@ class SettingsController extends Controller
     public function index()
     {
         $item = $this->settingRepository->getAllSettings();
+        // dd($this->settingRepository->getCountry('Nepal'));
+        // dd($item);
         return view('admin.setting.index',compact('item'));
     }
 
@@ -43,7 +45,7 @@ class SettingsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {       
+    {
         $validated = $request->validate([
             'item' => 'required',
             'value' => 'required',
@@ -92,6 +94,7 @@ class SettingsController extends Controller
     {
         try{
             $create = $this->settingRepository->updateSetting($id,$request);
+            // dd($create);
             return redirect(route('settings.index'))->with('success','Settings Updated');
         }
         catch(Exception $e){
@@ -108,7 +111,7 @@ class SettingsController extends Controller
     public function destroy($id)
     {
         try{
-            $this->settingRepository->deleteSetting($id); 
+            $this->settingRepository->deleteSetting($id);
             return redirect(route('settings.index'))->with('success','Settings Deleted');
         }
         catch(Exception $e){
