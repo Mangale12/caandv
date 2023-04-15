@@ -14,6 +14,7 @@ function showTab(n) {
   }
   if (n == (x.length - 1)) {
     document.getElementById("nextBtn").innerHTML = "Submit";
+    document.getElementById("nextBtn");
   } else {
     document.getElementById("nextBtn").innerHTML = "Next";
   }
@@ -37,8 +38,9 @@ function nextPrev(n) {
   // if you have reached the end of the form...
   if (currentTab >= x.length) {
     // ... the form gets submitted:
+    document.getElementById("prevBtn").innerHTML = "Please Wait !!";
+    document.getElementById("nextBtn").innerHTML = "Your Form is Submitting Thankyou ";
     document.getElementById("regForm").display="none";
-    document.getElementById("regForm").submit();
   }
   // Otherwise, display the correct tab:
     showTab(currentTab);
